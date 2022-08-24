@@ -1,0 +1,16 @@
+{
+	"preload": "preload.js",
+	"logo": "logo.png",
+	"features": [
+		{
+			"code": "time",
+			"explain": "时间戳",
+			"cmds": [
+				"t",
+				"time",
+				"timestamp",
+				"now"
+			]
+		}
+	]
+}
