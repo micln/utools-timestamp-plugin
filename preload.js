@@ -42,14 +42,19 @@ function format_duaration_to_now(s) {
 }
 
 function on_enter(action, callbackSetList) {
-	let now = Date.now()
-	let today = now - now % 86400000
+	if (action.payload && Number(action.payload) > 0) {
+		on_search(action, action.payload, callbackSetList)
+		return
+	}
+
+	let time = Date.now()
+	let today = time - time % 86400000
 
 	callbackSetList([
 		{
-			title: '当前时间：' + to_second(now),
-			description: format_datetime(now),
-			value: to_second(now)
+			title: '当前时间：' + to_second(time),
+			description: format_datetime(time),
+			value: to_second(time)
 		},
 		{
 			title: '今日零点：' + to_second(today),

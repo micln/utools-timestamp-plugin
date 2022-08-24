@@ -9,7 +9,14 @@
 				"t",
 				"time",
 				"timestamp",
-				"now"
+				"now",
+				{
+					"type": "regex",
+					"label": "时间戳转换",
+					"match": "/\\d{10,13}/i",
+					"minLength": 10,
+					"maxLength": 13
+				}
 			]
 		}
 	]
