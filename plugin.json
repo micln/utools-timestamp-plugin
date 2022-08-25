@@ -4,7 +4,7 @@
 	"features": [
 		{
 			"code": "time",
-			"explain": "时间戳",
+			"explain": "输入时间戳或日期，返回转换后的结果",
 			"cmds": [
 				"t",
 				"time",
@@ -13,8 +13,8 @@
 				{
 					"type": "regex",
 					"label": "时间戳转换",
-					"match": "/\\d{10,13}/i",
-					"minLength": 10,
+					"match": "/(^\\d{4}.\\d{0,2}.\\d{0,2})|(^\\d{8,13}$)/",
+					"minLength": 8,
 					"maxLength": 13
 				}
 			]

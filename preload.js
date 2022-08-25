@@ -1,4 +1,11 @@
 
+function is_timestamp(s) {
+	return s.match(/^\d+$/g)
+}
+
+function is_datetime(s) {
+	return s.match(/^\d{4}.\d+.\d+/g)
+}
 
 function to_second(s) {
 	return Math.floor(to_ms(s) / 1000)
@@ -42,8 +49,15 @@ function format_duaration_to_now(s) {
 }
 
 function on_enter(action, callbackSetList) {
-	if (action.payload && Number(action.payload) > 0) {
-		on_search(action, action.payload, callbackSetList)
+	let input = ''
+	if (action.payload) {
+		input = action.payload
+		action.payload = ''
+	}
+
+	if (input && (is_timestamp(input) || is_datetime(input))) {
+		setTimeout(() => { utools.setSubInputValue(input) }, 0)
+		on_search(action, input, callbackSetList)
 		return
 	}
 
@@ -70,8 +84,7 @@ function on_search(action, searchWord, callbackSetList) {
 		return
 	}
 
-	let isInt = searchWord.match(/^\d+$/g)
-	if (isInt) {
+	if (is_timestamp(searchWord)) {
 		callbackSetList([
 			{
 				title: '时间：' + format_datetime(Number(searchWord)),
@@ -82,8 +95,7 @@ function on_search(action, searchWord, callbackSetList) {
 		return
 	}
 
-	let isDatetime = searchWord.match(/^\d{4}.\w+.\w+/g)
-	if (isDatetime) {
+	if (is_datetime(searchWord)) {
 		let nums = searchWord.match(/\d+/g)
 		let year = nums[0]
 		let month = nums[1]
@@ -104,11 +116,19 @@ function on_search(action, searchWord, callbackSetList) {
 		return
 	}
 
+	callbackSetList([
+		{
+			title: '暂不支持的格式',
+			description: '欢迎评论或反馈到 github.com/micln/utools-timestamp-plugin （点击复制）',
+			value: 'github.com/micln/utools-timestamp-plugin'
+		}
+	])
 }
 
 function on_select(action, itemData, callbackSetList) {
 	utools.copyText(itemData.value)
 	utools.showNotification('已复制: ' + itemData.value)
+	utools.hideMainWindow()
 }
 
 window.exports = {
