@@ -1,6 +1,6 @@
 # uTools-Timestamp-Plugin
 
-### Usage
+## Usage 使用说明
 
 #### default state: show current timestamp
 
@@ -13,5 +13,11 @@
 #### input datetime return timestamp
 
 <img width="800" alt="utools-time-2" src="https://user-images.githubusercontent.com/4499674/186428600-bdc4d515-e690-485b-910b-8a3722b30bad.png">
+
+## Install 安装
+
+uTools 插件市场搜索 `Timestamp++`
+
+<img width="800" alt="image" src="https://user-images.githubusercontent.com/4499674/186578517-e7b2941b-96c9-4b16-97f3-592996168ed8.png">
 
 ### Inspired by [Alfred-Workflows-TimeStamp](https://github.com/WiconWang/Alfred-Workflows-TimeStamp)
