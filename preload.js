@@ -19,7 +19,11 @@ function to_ms(s) {
 }
 
 function format_datetime(s) {
-	return new Date(to_ms(s)).toLocaleString().replaceAll('/', '-')
+	return new Date(to_ms(s)).toLocaleString().replaceAll('/', '-').replaceAll(/\b\d{1}\b/g, '0$&')
+}
+
+function format_date(s) {
+	return new Date(to_ms(s)).toLocaleDateString().replaceAll('/', '-').replaceAll(/\b\d{1}\b/g, '0$&')
 }
 
 // second
@@ -61,19 +65,40 @@ function on_enter(action, callbackSetList) {
 		return
 	}
 
-	let time = Date.now()
-	let today = time - time % 86400000
+	let datetime = new Date();
+	let ts_now = datetime.getTime();
+
+	datetime.setHours(0);
+	datetime.setMinutes(0);
+	datetime.setSeconds(0);
+	datetime.setMilliseconds(0);
+	let ts_today = datetime.getTime();
 
 	callbackSetList([
 		{
-			title: '当前时间：' + to_second(time),
-			description: format_datetime(time),
-			value: to_second(time)
+			title: '此刻：' + to_second(ts_now),
+			description: format_datetime(ts_now),
+			value: to_second(ts_now)
 		},
 		{
-			title: '今日零点：' + to_second(today),
-			description: format_datetime(today),
-			value: to_second(today)
+			title: '零点：' + to_second(ts_today),
+			description: format_datetime(ts_today),
+			value: to_second(ts_today)
+		},
+		{
+			title: '复制时间',
+			description: format_datetime(ts_now),
+			value: format_datetime(ts_now)
+		},
+		{
+			title: '复制零点',
+			description: format_datetime(ts_today),
+			value: format_datetime(ts_today)
+		},
+		{
+			title: '复制日期',
+			description: format_date(ts_today),
+			value: format_date(ts_today)
 		}
 	])
 }
@@ -104,12 +129,12 @@ function on_search(action, searchWord, callbackSetList) {
 		let minite = nums.length > 4 ? nums[4] : 0
 		let second = nums.length > 5 ? nums[5] : 0
 
-		let time = new Date(year, month - 1, day, hour, minite, second).getTime()
+		let ts_now = new Date(year, month - 1, day, hour, minite, second).getTime()
 		callbackSetList([
 			{
-				title: '时间戳：' + to_second(time),
-				description: format_duaration_to_now(to_second(time)),
-				value: to_second(time)
+				title: '时间戳：' + to_second(ts_now),
+				description: format_duaration_to_now(to_second(ts_now)),
+				value: to_second(ts_now)
 			}
 		])
 
