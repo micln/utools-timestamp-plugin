@@ -4,7 +4,7 @@
 
 #### default state: show current timestamp
 
-<img width="800" alt="utools-time-1" src="https://user-images.githubusercontent.com/4499674/186428570-d98efc43-59ce-4c52-acd0-d115d5e4d8ee.png">
+<img width="800" alt="utools-time-1" src="https://user-images.githubusercontent.com/4499674/216754458-c6b02c5a-0924-4094-8495-1fa131d1d347.png">
 
 #### input timestamp return datetime
 
