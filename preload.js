@@ -151,7 +151,7 @@ function on_search(action, searchWord, callbackSetList) {
 }
 
 function on_select(action, itemData, callbackSetList) {
-	utools.copyText(itemData.value)
+	utools.copyText(String(itemData.value))
 	utools.showNotification('已复制: ' + itemData.value)
 	utools.hideMainWindow()
 }
